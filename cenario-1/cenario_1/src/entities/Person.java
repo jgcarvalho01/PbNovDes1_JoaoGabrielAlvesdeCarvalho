@@ -35,12 +35,33 @@ public class Person {
         return children;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", spouse=" + spouse +
-                ", children=" + children +
-                '}';
+    public void addChild(Person child) {
+        children.add(child);
     }
+
+    public void spouse(Person spouse) {
+        this.spouse = spouse;
+        spouse.spouse = this;
+    }
+
+    public String printFamilyTree(){
+        System.out.println("Name: " + name + "-- Married to: " + spouse.name+" -- Children: ");
+        if(children.isEmpty()){
+            System.out.println("No children found");
+        } else {
+            for(Person child : children){
+                child.printFamilyTree();
+            }
+        }
+        return "true";
+    }
+
+//    @Override
+//    public String toString() {
+//        return "Person{" +
+//                "name='" + name + '\'' +
+//                ", spouse=" + spouse +
+//                ", children=" + children +
+//                '}';
+//    }
 }
