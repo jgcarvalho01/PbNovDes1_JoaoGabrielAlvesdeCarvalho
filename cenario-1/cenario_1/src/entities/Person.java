@@ -46,13 +46,20 @@ public class Person {
 
     public void printFamilyTree(int level){
         String indent = "\t".repeat(level);
-        System.out.println(indent+"Name: " + name + "-- Married to: " + spouse.name+" -- Children: ");
+
+        if(spouse != null){
+            System.out.print(indent + name + " -- Married to: " + spouse.name);
+        } else {
+            System.out.println(indent + name + " -- Single");
+        }
+
         if(!children.isEmpty()){
+            System.out.println(" -- Children: ");
             for(Person child : children){
                 child.printFamilyTree(level+1);
             }
-        } else {
-            System.out.println(indent+"No children found");
+        } else if (spouse != null){
+            System.out.println();
         }
     }
 

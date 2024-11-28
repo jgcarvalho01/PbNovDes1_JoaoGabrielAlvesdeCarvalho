@@ -9,6 +9,9 @@ public class Main {
         dante.spouse(new Person("Maria"));
         Person abel = new Person("Abel", dante);
         abel.spouse(new Person("Amelia"));
+        Person luffy = new Person("Luffy", abel);
+        Person makino = new Person("Makino", abel);
+        makino.spouse(new Person("Shanks"));
 
         gabs.printFamilyTree(0);
 
