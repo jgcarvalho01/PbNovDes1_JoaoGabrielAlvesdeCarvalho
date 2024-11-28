@@ -44,24 +44,16 @@ public class Person {
         spouse.spouse = this;
     }
 
-    public String printFamilyTree(){
-        System.out.println("Name: " + name + "-- Married to: " + spouse.name+" -- Children: ");
-        if(children.isEmpty()){
-            System.out.println("No children found");
-        } else {
+    public void printFamilyTree(int level){
+        String indent = "\t".repeat(level);
+        System.out.println(indent+"Name: " + name + "-- Married to: " + spouse.name+" -- Children: ");
+        if(!children.isEmpty()){
             for(Person child : children){
-                child.printFamilyTree();
+                child.printFamilyTree(level+1);
             }
+        } else {
+            System.out.println(indent+"No children found");
         }
-        return "true";
     }
 
-//    @Override
-//    public String toString() {
-//        return "Person{" +
-//                "name='" + name + '\'' +
-//                ", spouse=" + spouse +
-//                ", children=" + children +
-//                '}';
-//    }
 }
