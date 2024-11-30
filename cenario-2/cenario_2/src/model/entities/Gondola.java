@@ -23,8 +23,12 @@ public class Gondola {
         return true;
     }
 
-    public boolean hasPassenger(Person... passenger) {
+    public boolean hasPassenger(Person passenger) {
         return passenger.equals(seat1) || passenger.equals(seat2);
+    }
+
+    public boolean hasAdult(Adult adult){
+        return adult != null && (adult.equals(seat1) || adult.equals(seat2));
     }
 
     @Override

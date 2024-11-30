@@ -1,5 +1,9 @@
 package model.entities;
 
+import model.exceptions.ChildWithoutResponsibleException;
+import model.exceptions.GondolaFullException;
+import model.exceptions.PersonAlreadyOnBoardException;
+
 import java.util.Arrays;
 
 public class FerrisWheel {
@@ -30,20 +34,29 @@ public class FerrisWheel {
         }
 
         Gondola gondola = gondolas[number - 1];
-
-        for(Person passenger : passengers) {
-            if(passenger instanceof Child child && child.getAge() < 12){
-                Adult responsible = child.getResponsible();
-                boolean hasResponsible = Arrays.asList(passengers).contains(responsible);
-                if(responsible == null || !hasResponsible){
-                    System.out.printf("ERROR: %s is under 12 and the father is not present%n", child.getName());
-                    return;
+        try {
+            for(Person passenger : passengers) {
+                if(isPersonOnBoard(passenger)) {
+                    throw new PersonAlreadyOnBoardException(passenger.getName()+" is already on a gondola");
                 }
             }
-        }
 
-        if(!gondola.boardPassengers(passengers)) {
-            System.out.println("ERROR: Gondola is already full!");
+            for (Person passenger : passengers) {
+                if (passenger instanceof Child child && child.getAge() < 12) {
+                    Adult responsible = child.getResponsible();
+                    boolean hasResponsible = Arrays.asList(passengers).contains(responsible);
+                    if (responsible == null || !hasResponsible) {
+                        throw new ChildWithoutResponsibleException(child.getName()
+                                +" is under 12 and the father is not present");
+                    }
+                }
+            }
+
+            if (!gondola.boardPassengers(passengers)) {
+                throw new GondolaFullException("Gondola "+number+" is already full");
+            }
+        } catch (PersonAlreadyOnBoardException | ChildWithoutResponsibleException | GondolaFullException e){
+            System.out.println("ERROR: " + e.getMessage());
         }
 
     }
