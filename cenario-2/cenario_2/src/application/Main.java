@@ -3,7 +3,6 @@ package application;
 import model.entities.Adult;
 import model.entities.Child;
 import model.entities.FerrisWheel;
-import model.entities.Gondola;
 
 public class Main {
     public static void main(String[] args) {
