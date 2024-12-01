@@ -14,21 +14,20 @@ public class Main {
             count_funny++;
             position += ":-)".length();
         }
-        System.out.println("Number of funny: " + count_funny);
 
         position = 0;
         while ((position = sentence.indexOf(":-(", position)) != -1) {
             count_sad++;
             position += ":-(".length();
         }
-        System.out.println("Number of sad: " + count_sad);
 
-//        if(sentence.contains(":-)")){
-//            System.out.println("divertido");
-//        } else if(sentence.contains(":-(")){
-//            System.out.println("chateado");
-//        } else {
-//            System.out.println("neutro");
-//        }
+        System.out.print("Sentimento: ");
+        if(count_funny > count_sad) {
+            System.out.println("divertido");
+        } else if(count_sad > count_funny) {
+            System.out.println("chateado");
+        } else {
+            System.out.println("neutro");
+        }
     }
 }
